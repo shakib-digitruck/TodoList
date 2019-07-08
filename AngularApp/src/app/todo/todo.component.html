@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content white-text">
+        <div class="row">
+          <div class="s5">
+            <form #todoForm="ngForm" (ngSubmit)="onSubmit(todoForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="todoService.selectedTodo._id">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="todoService.selectedTodo.name"
+                         placeholder="Enter Todo name" required>
+                  <label>Name :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="duration" #name="ngModel" [(ngModel)]="todoService.selectedTodo.duration"
+                         placeholder="Duration in minute">
+                  <label>Duration :</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="status" #name="ngModel" [(ngModel)]="todoService.selectedTodo.status"
+                         placeholder="Active or Inactive">
+                  <label>Status :</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <button class="btn btn-custom right" type="button" (click)="resetForm(todoForm)">Reset</button>
+                  <button class="btn btn-custom right" type="submit" [disabled]="!todoForm.valid">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="s7">
+            <table class="responsive-table highlight">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tr *ngFor="let emp of todoService.todos">
+
+                <td>{{emp.name}}</td>
+                <td>{{emp.duration}}</td>
+                <td>{{emp.status}}</td>
+                <td>
+                  <a class="action-btn" (click)="onEdit(emp)">
+                    <i class="material-icons">edit</i>
+                  </a>
+                  <a class="action-btn" (click)="onEditStatus(emp)">
+                    <i class="material-icons">stop</i>
+                  </a>
+                  <a class="action-btn" (click)="onDelete(emp._id, todoForm)">
+                    <i class="material-icons">delete</i>
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
